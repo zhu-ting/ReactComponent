@@ -1,0 +1,2 @@
+const connect WithJss: Connect () => {
+}
