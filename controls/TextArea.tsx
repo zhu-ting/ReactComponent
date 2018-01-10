@@ -4,7 +4,7 @@ import { connect } from "utils"
 import { label as labelStyle, ctrl as ctrlStyle, staticStyle } from "./styles"
 
 const styles = {
-  textArea: {
+  textarea: {
     ...ctrlStyle,
     padding: 10,
     height: 140,
@@ -20,8 +20,9 @@ const styles = {
 
 interface Props {
   name: string
+  value?: string
   placeholder: string
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
+  onChange?: (value: string, name: string) => void
   classes?: Classes
   label?: string
   className?: string
@@ -29,14 +30,19 @@ interface Props {
   disabled?: boolean
 }
 
-function TextArea({name, onChange, classes, className, placeholder, label, static: isStatic, disabled}: Props) {
-  const textArea =
+function Textarea({name, value, onChange, classes, className, placeholder, label, static: isStatic, disabled}: Props) {
+  const changeHandler = onChange ?
+    ({target: {name, value}}: React.ChangeEvent<HTMLTextAreaElement>) => onChange(value, name) :
+    null
+  value = value === null || value === undefined ? "" : value
+  const textarea =
   (<textarea
         name={name}
+        value={value}
         placeholder={placeholder}
-        onChange={onChange}
+        onChange={changeHandler}
         className={cs(
-          classes.textArea,
+          classes.textarea,
           {
             [className]: !label,
             [classes.disabled]: disabled,
@@ -51,9 +57,9 @@ function TextArea({name, onChange, classes, className, placeholder, label, stati
      <div className={classes.label}>
        {label}
      </div>
-       {textArea}
+       {textarea}
    </label>
-  : textArea
+  : textarea
 }
 
-export default connect(TextArea, {styles})
+export default connect(Textarea, {styles})
