@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { connect } from 'utils'
 import * as cs from "classnames"
+import { label as labelStyle, ctrl as ctrlStyle, staticStyle } from "./styles"
 
 const styles = {
   wrapper: {
@@ -15,26 +16,11 @@ const styles = {
     paddingTop: 3,
   },
   input: {
-    border: "2px solid #dddddd",
-    background: '#fff',
-    height: 40,
-    padding: '0 10px',
-    verticalAlign: 'middle',
-    lineHeight: "normal",
-    color: '#182026',
-    fontSize: 16,
-    fontWeight: 400,
-    appearance: 'none',
-    "&::placeholder": {
-      color: 'rgba(92,113,128,0.5)'
-    }
+    ...ctrlStyle,
+    padding: 10,
   },
   label:{
-    height: 18,
-    lineHeight: "18px",
-    fontSize: 15,
-    color: "#89949a",
-    marginBottom: 10,
+    label: labelStyle,
   },
   invalid: {
     border: "2px solid red",
@@ -43,10 +29,7 @@ const styles = {
   disabled: {
     backgroundColor: "#f7f7f7",
   },
-  static: {
-    backgroundColor: "#f7f7f7",
-    border: "none",
-  },
+  static: staticStyle,
   required: {
     color: "red",
   },
