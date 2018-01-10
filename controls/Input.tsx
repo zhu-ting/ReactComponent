@@ -97,7 +97,7 @@ const Input: React.SFC<Props&WithStyles> = ({type, name, onChange, classes, plac
     <label className={cs(className)}>
       <div className={classes.label}>
        {label}
-       <span className={cs({[classes.required]: required})}>*</span>
+       {required && <span className={classes.required}>*</span>}
       </div>
       {input}
    </label>
