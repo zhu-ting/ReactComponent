@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect } from 'utils'
+import * as cs from "classnames"
 
 const styles = {
   input: {
@@ -11,7 +12,7 @@ const styles = {
     height: 40,
     padding: '0 10px',
     verticalAlign: 'middle',
-    lineHeight: 40,
+    lineHeight: "normal,
     color: '#182026',
     fontSize: 16,
     fontWeight: 400,
@@ -28,22 +29,24 @@ interface Props {
   name: string;
   placeholder: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>)=> void;
+  className?: string
 }
 
-interface Styles {
-  classes: Classes
-}
-
-function Input({type, name, onChange, classes, placeholder}: Props & Styles){
+const Input: React.SFC<Props&WithStyles> = ({type, name, onChange, placeholder, className, disabled}) => {
   return (
     <input
       type={type}
       name={name}
       placeholder={placeholder}
       onChange={onChange}
-      className={classes.input}
+      className={cs(classes.input, className)}
+      disabled={disabled}
     />
   )
+ }
+                       
+Input.defaultProps = {
+  type: "text"
 }
 
 export default connect<Props>(Input, {styles})
