@@ -46,7 +46,10 @@ const styles = {
   static: {
     backgroundColor: "#f7f7f7",
     border: "none",
-  }
+  },
+  required: {
+    color: "red",
+  },
 }
 
 interface Props {
@@ -60,10 +63,11 @@ interface Props {
   validMsg?: string
   static?: boolean
   ctrlRef? ( input: HTMLInputElement ) => void
+  required: boolean
 }
 
 const Input: React.SFC<Props&WithStyles> = ({type, name, onChange, classes, placeholder,
-   className, disabled, label, value, validMsg, static: _static, ctrlRef}) => {
+   className, disabled, label, value, validMsg, static: _static, ctrlRef, required}) => {
   let changeHandler = onChange?({target:{name,value}}: React.changeEvent<HTMLInputElement>)=>onChange(value,name):null
   value = value === null || value === undefined ? "" : value
   const input = (
@@ -89,7 +93,15 @@ const Input: React.SFC<Props&WithStyles> = ({type, name, onChange, classes, plac
     <div className={classes.validMsg}>{validMsg}</div>
     </div>
   )
-  return label?<label className={cs(className)}><div className={classes.label}>{label}</div>{input}</label>:input
+  return label ? (
+    <label className={cs(className)}>
+      <div className={classes.label}>
+       {label}
+       <span className={cs({[classes.required]: required})}>*</span>
+      </div>
+      {input}
+   </label>
+  ) : input
  }
                        
 Input.defaultProps = {
