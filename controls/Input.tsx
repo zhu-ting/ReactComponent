@@ -59,15 +59,17 @@ interface Props {
   label?: string
   validMsg?: string
   static?: boolean
+  ctrlRef? ( input: HTMLInputElement ) => void
 }
 
 const Input: React.SFC<Props&WithStyles> = ({type, name, onChange, classes, placeholder,
-   className, disabled, label, value, validMsg, static: _static}) => {
+   className, disabled, label, value, validMsg, static: _static, ctrlRef}) => {
   let changeHandler = onChange?({target:{name,value}}: React.changeEvent<HTMLInputElement>)=>onChange(value,name):null
   value = value === null || value === undefined ? "" : value
   const input = (
    <div className={classes.wrapper}>
     <input
+      ref={ctrlRef}
       type={type}
       value={value}
       name={name}
