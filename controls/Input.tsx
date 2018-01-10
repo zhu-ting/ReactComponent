@@ -42,6 +42,10 @@ const styles = {
   },
   disabled: {
     backgroundColor: "#f7f7f7",
+  },
+  static: {
+    backgroundColor: "#f7f7f7",
+    border: "none",
   }
 }
 
@@ -54,10 +58,13 @@ interface Props {
   className?: string
   label?: string
   validMsg?: string
+  static?: boolean
 }
 
-const Input: React.SFC<Props&WithStyles> = ({type, name, onChange, classes, placeholder, className, disabled, label, value, validMsg}) => {
+const Input: React.SFC<Props&WithStyles> = ({type, name, onChange, classes, placeholder,
+   className, disabled, label, value, validMsg, static: _static}) => {
   let changeHandler = onChange?({target:{name,value}}: React.changeEvent<HTMLInputElement>)=>onChange(value,name):null
+  value = value === null || value === undefined ? "" : value
   const input = (
    <div className={classes.wrapper}>
     <input
@@ -71,10 +78,11 @@ const Input: React.SFC<Props&WithStyles> = ({type, name, onChange, classes, plac
          {
            [className]: !label,
            [classes.invalid]: !validMsg,
-           [classes.disabled]: disabled
+           [classes.disabled]: disabled,
+           [classes.static]: _static
          }
        )}
-      disabled={disabled}
+      disabled={disabled || _static}
     />
     <div className={classes.validMsg}>{validMsg}</div>
     </div>
