@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { connect, Classes } from 'utils'
+import { connect } from 'utils'
 
 const styles = {
   input: {
@@ -28,10 +28,13 @@ interface Props {
   name: string;
   placeholder: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>)=> void;
-  classes: Classes;
 }
 
-function Input({type, name, onChange, classes, placeholder}: Props){
+interface Styles {
+  classes: Classes
+}
+
+function Input({type, name, onChange, classes, placeholder}: Props & Styles){
   return (
     <input
       type={type}
@@ -43,4 +46,4 @@ function Input({type, name, onChange, classes, placeholder}: Props){
   )
 }
 
-export default connect(Input, {styles})
+export default connect<Props>(Input, {styles})
