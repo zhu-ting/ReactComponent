@@ -1,3 +1,4 @@
+// 输入框组件，验证规则为必填，否则红框
 import * as cs from "classnames"
 import * as React from "react"
 import { connect } from "utils"
