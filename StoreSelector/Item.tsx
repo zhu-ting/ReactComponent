@@ -1,4 +1,5 @@
 import { Store } from "bindo-api-client"
+import { Check } from "components/controls"
 import * as React from "react"
 import { connect } from "utils"
 const defaultImg = "https://d25i28iur6fb9a.cloudfront.net/store_pictures/986/medium/store_picture.jpg?1482306656"
@@ -27,10 +28,7 @@ const styles = {
     "paddingLeft": 10,
     "cursor": "pointer",
     "&:hover": {
-      backgroundColor: "#f7f7f7",
-    },
-    "&:active": {
-      backgroundColor: "#dddddd",
+      backgroundColor: "#f2f2f2",
     },
   },
   logo: {
@@ -81,6 +79,7 @@ function Item({store, classes, isSelected, onToggleSelect, children, isBranch}: 
           <div className={classes.name}>{store.title}</div>
           <div>{store.address1}</div>
         </div>
+        <Check value={isSelected}/>
       </div>
       {children}
     </span>
